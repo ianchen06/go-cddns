@@ -11,7 +11,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 )
 
 var logger *log.Logger
@@ -65,9 +64,6 @@ func main() {
 	go handleInterrupt(sigs, cfm)
 
 	updateCloudflareRecord(cfm)
-	for range time.NewTicker(time.Duration(cloudflareConfig.UpdateInterval) * time.Minute).C {
-		updateCloudflareRecord(cfm)
-	}
 
 	logger.Println("done")
 }
